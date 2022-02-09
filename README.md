@@ -1,4 +1,4 @@
-# wanted_pre_onboarding
+# 원티드 프리온보딩 코스
 
 모든 컴포넌트는 `React`와 `Styled-component`를 사용하여 제작하였습니다.
 
