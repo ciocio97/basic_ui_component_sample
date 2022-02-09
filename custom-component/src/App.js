@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import Toggle from '../src/component/Toggle';
 import Modal from '../src/component/Modal';
@@ -9,14 +8,14 @@ import AutoComplete from '../src/component/AutoComplete';
 import ClickToEdit from '../src/component/ClickToEdit';
 import './App.css';
 
-const Container = styled.div`
+const Container = styled.div `
   width: 100vw;
   height: auto;
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
 `
-const RenderContainer = styled.div`
+const RenderContainer = styled.div `
   position: relative;
   width: 90%;
   height: 400px;
@@ -27,7 +26,7 @@ const RenderContainer = styled.div`
   align-items: center;
   border: 2px solid rgba(105, 105, 105, 0.2);
 `
-const Title = styled.p`
+const Title = styled.p `
   position: absolute;
   bottom: 10px;
   right: 10px;
@@ -36,32 +35,29 @@ const Title = styled.p`
   font-weight: 700;
 `
 
-function FinalRender (){
-  const componentsName = [
-    {name: 'Toggle', element: <Toggle />,},
-    {name: 'Modal', element: <Modal />,},
-    {name: 'Tab', element: <Tab />,},
-    {name: 'Tag', element: <Tag />,},
-    {name: 'AutoComplete', element: <AutoComplete />,},
-    {name: 'ClickToEdit', element: <ClickToEdit />,},
-  ];
-  return (
-    <>
-      {componentsName.map((item, idx)=> (
-        <Container key={idx}>
-          <RenderContainer>
-            <Title>{item.name}</Title>
-            {item.element}
-          </RenderContainer>
-        </Container>    
-      ))}
-    </>
-  )
+function App() {
+    const componentsName = [
+        { name: 'Toggle', element: < Toggle / > , },
+        { name: 'Modal', element: < Modal / > , },
+        { name: 'Tab', element: < Tab / > , },
+        { name: 'Tag', element: < Tag / > , },
+        { name: 'AutoComplete', element: < AutoComplete / > , },
+        { name: 'ClickToEdit', element: < ClickToEdit / > , },
+    ];
+    return ( <
+        > {
+            componentsName.map((item, idx) => ( <
+                Container key = { idx } >
+                <
+                RenderContainer >
+                <
+                Title > { item.name } < /Title> { item.element } <
+                /RenderContainer> <
+                /Container>    
+            ))
+        } <
+        />
+    )
 }
 
-ReactDOM.render(
-  <React.StrictMode>  
-    <FinalRender />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+export default App;
