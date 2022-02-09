@@ -37,23 +37,22 @@ const Title = styled.p `
 
 function App() {
     const componentsName = [
-        { name: 'Toggle', element: < Toggle / > , },
-        { name: 'Modal', element: < Modal / > , },
-        { name: 'Tab', element: < Tab / > , },
-        { name: 'Tag', element: < Tag / > , },
-        { name: 'AutoComplete', element: < AutoComplete / > , },
-        { name: 'ClickToEdit', element: < ClickToEdit / > , },
+        { name: 'Toggle', element: <Toggle /> , },
+        { name: 'Modal', element: <Modal /> , },
+        { name: 'Tab', element: <Tab /> , },
+        { name: 'Tag', element: <Tag /> , },
+        { name: 'AutoComplete', element: <AutoComplete /> , },
+        { name: 'ClickToEdit', element: <ClickToEdit /> , },
     ];
     return ( <
         > {
-            componentsName.map((item, idx) => ( <
-                Container key = { idx } >
-                <
-                RenderContainer >
-                <
-                Title > { item.name } < /Title> { item.element } <
-                /RenderContainer> <
-                /Container>    
+            componentsName.map((item, idx) => ( 
+                <Container key = { idx } >
+                <RenderContainer >
+                <Title > { item.name } < /Title> 
+                { item.element } 
+                </RenderContainer> 
+                </Container>    
             ))
         } <
         />
