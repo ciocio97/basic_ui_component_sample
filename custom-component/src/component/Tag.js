@@ -30,7 +30,7 @@ const TagBox = styled.button`
   background-color: #4100CA;
 `
 
-function Tab (){
+function Tag (){
   const [text, setText] = useState('');
   const [allTags, setAllTags] = useState([]);
   const handleText = (event) => {
@@ -72,4 +72,4 @@ function Tab (){
   )
 };
 
-export default Tab;
+export default Tag;
