@@ -44,18 +44,19 @@ function App() {
         { name: 'AutoComplete', element: <AutoComplete /> , },
         { name: 'ClickToEdit', element: <ClickToEdit /> , },
     ];
-    return ( <
-        > {
+    return ( 
+       <> 
+       {
             componentsName.map((item, idx) => ( 
-                <Container key = { idx } >
-                <RenderContainer >
-                <Title > { item.name } < /Title> 
+                <Container key = { idx }>
+                <RenderContainer>
+                <Title> { item.name } </Title> 
                 { item.element } 
                 </RenderContainer> 
                 </Container>    
             ))
-        } <
-        />
+        } 
+       </>
     )
 }
 
