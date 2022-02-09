@@ -1,7 +1,6 @@
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import { CloseButton } from './Modal';
-import _ from 'lodash';
 
 const dummyData = [
   'alpha', 'bravo', 'charlie', 'delta', 'echo', 'foxtrot', 'golf', 'hotel', 'india',
@@ -61,35 +60,48 @@ function AutoComplete (){
   const listRef = useRef();
   const [word, setWord] = useState('');
   const [isOpen, setIsOpen] = useState(false);
+  const [wordList, setWordList] = useState([]);
+
+  const clearWord = () => {
+    setWord('');
+    setIsOpen(false);
+  }
+
   const handleWord = (event) => {
-    if(event === ''){
-      setWord('');
-      setIsOpen(false);
-    } else if(
-      event.target.value.length === 0){
+    const newWord = event.target.value;
+    if(newWord.length === 0){
       setIsOpen(false);
     } else {
-      setIsOpen(true);
+      const newList = sortedDummyData.filter((el) => {
+        let result = true;
+        for(let i=0; i<newWord.length; i++){
+          result = result && newWord.toLowerCase()[i] === el[i];
+        }
+        return result;
+      });
+      if(newList.length === 0){
+        setWordList([]);
+        setIsOpen(false);
+      } else {
+        setWordList(newList);
+        setIsOpen(true);
+      }
     }
-    setWord(event.target.value);
+    setWord(newWord);
   }
   return (
     <>
       <Container>
-        <CloseButton search onClick={() => handleWord('')}>&times;</CloseButton>
+        <CloseButton search onClick={clearWord}>&times;</CloseButton>
         <Input value={word} onChange={handleWord} open={isOpen}/>
         <WordContainer open={isOpen} ref={listRef}>
-        {sortedDummyData.map((item, idx) => {
-          if(_.startsWith(item, word) && word !== ''){
-            return (
-              <WordList 
-                key={idx} 
-                onClick={() => {setWord(item); setIsOpen(false);}}
-              >
-                {item}
-              </WordList>); 
-          } else return false;
-        })}
+        {wordList.map((item, idx) => (
+          <WordList 
+            key={idx} 
+            onClick={() => {setWord(item); setIsOpen(false);}}
+          >
+            {item}
+          </WordList>))}
       </WordContainer>
       </Container>   
     </>

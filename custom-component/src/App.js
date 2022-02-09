@@ -9,11 +9,11 @@ import ClickToEdit from '../src/component/ClickToEdit';
 import './App.css';
 
 const Container = styled.div `
-  width: 100vw;
   height: auto;
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
+  
 `
 const RenderContainer = styled.div `
   position: relative;
@@ -46,12 +46,12 @@ function App() {
     ];
     return ( 
        <> 
-       { componentsName.map((item, idx) => ( 
+       {componentsName.map((item, idx) => ( 
           <Container key = { idx }>
-          <RenderContainer>
-          <Title> { item.name } </Title> 
-          { item.element } 
-          </RenderContainer> 
+            <RenderContainer>
+            <Title> { item.name } </Title> 
+            { item.element } 
+            </RenderContainer> 
           </Container>    
         ))} 
        </>
