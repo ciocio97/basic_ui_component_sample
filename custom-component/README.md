@@ -1,70 +1,231 @@
-# Getting Started with Create React App
+# 원티드 프리온보딩 코스
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+모든 컴포넌트는 `React`와 `Styled-component`를 사용하여 제작하였습니다.
 
-## Available Scripts
+<br />
 
-In the project directory, you can run:
+Toggle
+------
 
-### `npm start`
+<p align="center">
+  <img src= https://user-images.githubusercontent.com/80025242/152874365-f164f972-d953-4daa-972d-c5db9dd5ed9c.gif />
+</p>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<br />
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- *구현한 방법 & 이유*
 
-### `npm test`
+  ```
+  Toggle버튼은 On/Off 2가지 상태만 가지기 때문에, "형태만 다른 체크 박스"라고 생각했습니다.
+  input태그의 Check-box는 설문조사나 선호도를 표시할 때 주로 사용하는데, 
+  이때 label태그와 함께 사용해 Check-box의 특성이나 속성을 명시해줍니다.
+  또한 label태그는 input태그와 for과 id로 연결되어 input태그를 포커싱하거나 활성화시킬 수 있고,
+  css를 자유롭게 적용할 수 있습니다.
+  input태그의 Check-box 속성은 살리면서 css를 원하는대로 변경하고 싶었기 때문에 이 방법을 선택하여 구현하였습니다.
+  (토글의 상태에 따라 변경되는 요소가 없다면 CSS만 사용해서 구현할 수도 있습니다.)
+  ```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- *구현하며 겪었던 문제 & 해결한 방법*
+  
+  ```
+  Toggle버튼을 킬 때와 끌 때 모두 배경색을 변경시켜야 했습니다.
+  해당 태그에 class나 id 값을 부여해 css 스타일을 추가해줄 수도 있었지만,
+  저는 styled-component의 장점 중 하나인, 부모 속성을 내려받을 수 있다는 점을 이용해
+  버튼이 켜졌을 때 true속성을, 버튼이 꺼졌을 때 false 속성을 줌으로써 해당 태그의 스타일을 변경했습니다.
+  ```
+  
+- *실행 방법*
 
-### `npm run build`
+  ```
+  동그라미 버튼을 클릭하면 클릭한 곳의 반대 방향으로 이동하며 배경색이 바뀝니다.
+  ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<br />
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Modal
+-----
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/80025242/152874431-023ba5ee-0da3-4c65-89f5-51f96c190590.gif" />
+</p>
 
-### `npm run eject`
+<br />
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- *구현한 방법 & 이유*
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+  ```
+  Modal창은 사용자가 현재 페이지에 머물면서 추가적인 정보를 보게끔 유도할 때 사용되는 컴포넌트입니다.
+  이 점에 착안해, Modal창 뒷편의 엘리먼트의 위치는 고수하면서 browser에 띄울 수 있게 설계했습니다.
+  모달창 뒷 쪽 엘리먼트들이 옅게 보일 수 있게 배경에 투명도를 주었습니다.
+  또한, position의 absolute 속성을 부여해 z-index로 레이어 순서를 조정할 수 있게 디자인했습니다. 
+  그리고 어떤 엘리먼트의 자식으로 들어가도 높이와 넓이를 맞출 수 있게 % 단위를 사용해 구현했습니다.
+  ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- *구현하며 겪었던 문제 & 해결한 방법*
+  
+  ```
+  일반적인 Modal창은 컨텐츠 이외의 영역을 클릭하면 닫히기 때문에 
+  이를 위해 컨텐츠와 컨텐츠 이외의 영역을 구분지어 컴포넌트를 만들어야 하는지 고민했습니다.
+  컨텐츠 이외의 영역에 이벤트를 부여하게되면 버블링 현상때문에 컨텐츠 영역에서도 이벤트가 발생되기 때문입니다.
+  이벤트 버블링을 막기 위해 event.preventDefault() 메서드를 생각했으나, 이는 하위 노드의 이벤트까지
+  아예 차단해버려서 닫기 버튼을 눌렀을 때도 이벤트가 발생하지 않는 문제를 일으켰습니다.
+  컨텐츠 영역의 이벤트 발생만 차단하고 싶었기 때문에 event.stopPropagation() 메서드를 사용해 해결하였습니다.
+  이 메서드를 사용하고 싶지 않다면, 컨텐츠와 컨텐츠 외의 영역을 각자 컴포넌트로 만들어서 분리한 다음
+  컨텐츠 외 컴포넌트에 원하는 속성값을 내려줌으로써 핸들링할 수 있을 것입니다.
+  ```
+  
+- *실행 방법*
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+  ```
+  OpenModal버튼을 클릭하면 모달창이 등장하고 CloseModal로 버튼의 이름이 변경됩니다.
+  모달창은 창을 클릭하면 닫히지 않고, 창 밖의 부분이나 닫기 버튼을 클릭하면 모달창이 사라집니다.
+  ```
 
-## Learn More
+<br />
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Tab
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/80025242/152874410-553d13c4-f7c7-4b75-8282-08c73e41b620.gif" />
+</p>
 
-### Code Splitting
+<br />
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- *구현한 방법 & 이유*
 
-### Analyzing the Bundle Size
+  ```
+  Tab은 웹에서 메뉴의 형태로 자주 쓰이는 컴포넌트입니다.
+  메뉴 리스트는 상황에 따라 추가되거나 삭제될 수 있기 때문에 확장성을 고려해 메뉴 리스트 배열을 만들어
+  배열에 있는 개수 만큼 메뉴 탭이 등장하게 설계했습니다.
+  이를 위해 flex가 아닌 grid를 사용해 배열의 개수만큼 column 영역이 생성되게 하였습니다.
+  Tab 메뉴를 각각 클릭하면 렌더링되는 화면이 바뀌되, 첫 렌더링 시에는 첫 번째 탭에 해당하는 화면이 보이게 디자인했습니다.
+  Tab 메뉴를 클릭하지 않았을 때 아무것도 렌더링되지 않는다면 사용 경험이 좋지 않을 것이라 판단했습니다.
+  ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- *구현하며 겪었던 문제 & 해결한 방법*
+  
+  ```
+  Tab 메뉴의 개수가 늘어나거나 줄어들 때마다 렌더링되야하는 
+  (혹은 렌더링되기 위해 대기하는) 화면의 개수도 변경되야 했습니다.
+  이를 위해 Tab 메뉴이름과 렌더링 화면 컴포넌트를 객체로 묶어 배열로 관리했습니다.
+  배열 내 data를 조절하면 렌더링되는 엘리먼트는 자동으로 변경됩니다.
+  ```
+  
+- *실행 방법*
 
-### Making a Progressive Web App
+  ```
+  각 Tab 메뉴를 클릭하면 메뉴에 해당되는 화면이 렌더링되고 해당 메뉴 Tab의 색이 변화됩니다.
+  ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+<br />
 
-### Advanced Configuration
+Tag
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/80025242/152874379-7a9d30ae-9a78-4241-81b0-6091ea3bd66f.gif" />
+</p>
 
-### Deployment
+<br />
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- *구현한 방법 & 이유*
 
-### `npm run build` fails to minify
+  ```
+  Tag는 인스타그램의 해시태그같은, 키워드 버튼입니다.
+  사용자가 단어를 입력하면 Tag를 생성해야했기 때문에 Enter 키를 눌렀을 때 이벤트가 발생하도록 계획했습니다.
+  닫기 버튼을 누르면 해당 태그는 삭제되고, 이미 입력한 태그는 추가할 수 없게 구현했습니다.
+  태그 개수가 늘어나 입력창의 길이를 초과하는 경우를 고려해 높이 값은 auto로 설정하였습니다.
+  (태그 개수 증감에 대응하는 방법으로 태그 개수를 아예 제한하는 방법도 있습니다.)
+  ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- *구현하며 겪었던 문제 & 해결한 방법*
+  
+  ```
+  Tag를 useState에 담아 상태로 관리하면서 추가하고 삭제할 때마다 상태를 업데이트하는 방식으로 구현했습니다.
+  그런데 삭제할 때 이전 상태에서 해당 인덱스 값을 splice로 제거한 후 업데이트했더니
+  해당 인덱스뿐 아니라 이후 인덱스의 태그도 삭제되는 문제가 발생했습니다. (1개만 제거되야하는데 2개 제거됨)
+  이전 상태를 직접적으로 변경해서 생긴문제였기 때문에 (원래 상태도 splice메서드로 인해 값이 제거되고 
+  함수의 첫번째 인자로 받아온 이전 상태에서 또 splice로 값이 제거되어 총 2개의 값이 제거된 거였습니다)
+  이전 상태를 복사한 후 splice해줌으로써 문제를 해결했습니다.
+  ```
+  
+- *실행 방법*
+
+  ```
+  입력창에 단어를 입력한 후 엔터를 누르면 입력한 단어대로 태그가 생성됩니다.
+  태그 안의 닫기 버튼을 누르면 태그는 삭제됩니다.
+  동일한 단어를 한번 더 입력하면 태그는 추가되지 않습니다.
+  ```
+
+<br />
+
+AutoComplete
+------------
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/80025242/152874473-1ca257e0-fc4a-46b8-bc6a-ef24bc2a8f3b.gif" />
+</p>
+
+<br />
+
+- *구현한 방법 & 이유*
+
+  ```
+  검색어를 입력했을 때 자동 완성 리스트를 등장시키기 위해 엘리먼트 속성값에 따라 visibility속성을 변경해주었습니다.
+  검색어를 입력했다는 것 자체가 입력창에 텍스트가 있다는 의미이기 때문에 텍스트의 길이가 0인 기준으로 두었습니다.
+  자동 완성의 예시로 등장하는 배열은 dummy data로, 
+  입력창에 입력되는 텍스트의 앞글자부터 일치하는 단어만 필터링하도록 구현하였습니다.
+  닫기 버튼을 누르면 입력창의 글자가 아예 지워지고 
+  자동 완성 리스트의 단어를 클릭했을 땐 리스트가 닫히면서 입력창이 채워지도록 했습니다.
+  ```
+
+- *구현하며 겪었던 문제 & 해결한 방법*
+  
+  ```
+  한글로 검색할 때 초성만 입력해도 자동완성 리스트가 나오게 하는 부분이 어려웠습니다.
+  시간이 된다면 꼭 구현해보고 싶습니다.
+  ```
+  
+- *실행 방법*
+
+  ```
+  단어를 검색하고 자동 완성된 단어를 클릭하면 입력창이 해당 단어로 채워집니다.
+  x 버튼을 누르면 입력창의 단어가 지워집니다.
+  ```
+
+<br />
+
+ClickToEdit
+-----------
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/80025242/152874447-27cb083a-1655-4842-9d9b-353eba9ca369.gif" />
+</p>
+
+<br />
+
+- *구현한 방법 & 이유*
+
+  ```
+  입력창 이외의 곳을 클릭하면 아래 텍스트 결과가 업데이트되야했기 때문에, useRef를 사용해야겠다는 생각을 했습니다.
+  입력창을 클릭하면 기존의 텍스트가 전체 선택되면서 입력창이 강조되는 기능은 useRef를 사용해 구현했고,
+  아래 텍스트 결과가 업데이트 되는 기능은 입력창의 부모 엘리먼트에 이벤트를 할당하는 방법으로 구현했습니다.
+  입력창에 텍스트가 입력되는 동안에는 결과가 반영되면 안되기 때문에 입력창 상태와 결과 상태를 나눠서 반영했습니다.
+  ```
+
+- *구현하며 겪었던 문제 & 해결한 방법*
+  
+  ```
+  입력창 엘리먼트를 제외한 부분 어느 곳을 클릭해도 결과 텍스트가 바뀌게 하고싶어서 처음엔 window 객체를 활용했습니다.
+  그런데 window 자체에 click 이벤트를 할당하니, 입력창이 변화하는 수만큼 재랜더링이 일어나는 문제가 발생했습니다.
+  그래서 이 컴포넌트의 부모 컴포넌트를 생성하여 이벤트를 할당하였고 다시 랜더링되는 횟수를 1회로 줄일 수 있었습니다.
+  ```
+  
+- *실행 방법*
+
+  ```
+  입력창에 원하는 단어를 입력하시고 다른 곳을 클릭하시면 맨 아래 결과가 업데이트 됩니다.
+  ```
+
+<br />
