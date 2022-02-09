@@ -46,16 +46,14 @@ function App() {
     ];
     return ( 
        <> 
-       {
-            componentsName.map((item, idx) => ( 
-                <Container key = { idx }>
-                <RenderContainer>
-                <Title> { item.name } </Title> 
-                { item.element } 
-                </RenderContainer> 
-                </Container>    
-            ))
-        } 
+       { componentsName.map((item, idx) => ( 
+          <Container key = { idx }>
+          <RenderContainer>
+          <Title> { item.name } </Title> 
+          { item.element } 
+          </RenderContainer> 
+          </Container>    
+        ))} 
        </>
     )
 }
