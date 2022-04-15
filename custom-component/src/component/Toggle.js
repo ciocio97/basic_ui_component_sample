@@ -17,7 +17,7 @@ const ToggleButton = styled.label`
   border-radius: 50px;
   transition: .5s;
   -webkit-transition: .5s;
-  -ms-transform: .5s;
+  -ms-transition: .5s;
   background: #C5C5C5;
   ${props => props.on &&`
     background-color: #4100CA;
@@ -32,7 +32,7 @@ const ToggleCircle = styled.span`
   border-radius: 50%;
   transition: .4s;
   -webkit-transition: .4s;
-  -ms-transform: .4s;
+  -ms-transition: .4s;
   background-color: white;
   ${props => props.on &&`
     transform: translate(40px);
