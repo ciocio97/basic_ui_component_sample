@@ -1,4 +1,4 @@
-# 기본 UI 샘플 컴포넌트 ([Basic_UI_Component_Sample](https://github.com/ciocio97/Basic_UI_Component_Sample))
+# [Basic_UI_Component_Sample](https://github.com/ciocio97/Basic_UI_Component_Sample)
 
 모든 컴포넌트는 `React`와 `Styled-component`를 사용하여 제작하였습니다.
 
