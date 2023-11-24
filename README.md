@@ -1,4 +1,4 @@
-# [Basic_UI_Component_Sample](https://github.com/ciocio97/Basic_UI_Component_Sample)
+# [basic_ui_component_sample](https://github.com/ciocio97/basic_ui_component_sample)
 
 모든 컴포넌트는 `React`와 `Styled-component`를 사용하여 제작하였습니다.
 
